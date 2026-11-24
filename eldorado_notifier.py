@@ -34,19 +34,32 @@ SEEN_ORDERS_FILE = "seen_orders.json"
 AUTH_URL = "https://www.eldorado.gg/api/authentication/seller/token"
 ORDERS_URL = "https://www.eldorado.gg/api/orders/me/seller/orders?pageSize=20"
 
+def get_env(*keys):
+    """Fetches an environment variable matching any of the given keys, 
+    automatically handling quotes, case-insensitivity, and extra spaces."""
+    normalized = {
+        k.strip('"\' ').lower(): v.strip('"\' ')
+        for k, v in os.environ.items()
+    }
+    for key in keys:
+        target = key.strip('"\' ').lower()
+        if target in normalized and normalized[target]:
+            return normalized[target]
+    return None
+
 def load_config():
     # 1. Check environment variables first (ideal for cloud hosting)
-    env_client_id = os.environ.get("ELDORADO_CLIENT_ID") or os.environ.get("CLIENT_ID")
-    env_secret = os.environ.get("ELDORADO_CLIENT_SECRET") or os.environ.get("CLIENT_SECRET")
-    env_webhook = os.environ.get("DISCORD_WEBHOOK_URL")
-    
+    env_client_id = get_env("client_id", "eldorado_client_id")
+    env_secret = get_env("client_secret", "eldorado_client_secret")
+    env_webhook = get_env("discord_webhook_url", "webhook_url")
+
     if env_client_id and env_secret and env_webhook:
         return {
             "client_id": env_client_id,
             "client_secret": env_secret,
             "discord_webhook_url": env_webhook,
-            "discord_user_id": os.environ.get("DISCORD_USER_ID", ""),
-            "check_interval_seconds": int(os.environ.get("CHECK_INTERVAL_SECONDS", 30))
+            "discord_user_id": get_env("discord_user_id", "user_id") or "",
+            "check_interval_seconds": int(get_env("check_interval_seconds", "interval") or 30)
         }
 
     # 2. Fall back to config.json
