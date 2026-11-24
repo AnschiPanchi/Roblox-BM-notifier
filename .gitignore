@@ -1,5 +1,6 @@
 __pycache__/
 *.pyc
 seen_orders.json
+seen_boosts.json
 config.json
 .env

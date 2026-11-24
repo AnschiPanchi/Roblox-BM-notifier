@@ -5,10 +5,11 @@ Automatically monitors your Eldorado.gg seller account and pings your phone via 
 ---
 
 ### Features
-* **Instant Phone Push Notification**: Pings your Discord user account (`<@671311332548673536>`) so your phone buzzes/rings on every new sale.
-* **Rich Order Details**: Shows item title, price, quantity, buyer username, order status, and direct link to Eldorado dashboard.
+* **Instant Phone Push Notification**: Pings your Discord user account (`<@671311332548673536>`) so your phone buzzes/rings.
+* **Order Alerts**: Shows item title, price, quantity, buyer username, order status, and direct link.
+* **Boosting Request Alerts**: Automatically notifies you the moment a new boosting request is posted for games you subscribed to!
 * **Auto-Token Refresh**: Automatically refreshes Eldorado's 15-minute token in the background so it runs indefinitely without interruption.
-* **No Spam / Duplicate Filtering**: Remembers previously processed orders in `seen_orders.json`.
+* **No Spam / Duplicate Filtering**: Remembers previously processed items in `seen_orders.json` and `seen_boosts.json`.
 
 ---
 
